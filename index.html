@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Czylle J. Magpantay | Portfolio</title>
 
-    <!-- Internal CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
     /* ======================================
         0. GLOBAL & FONT IMPORT
@@ -15,9 +18,9 @@
     :root {
         /* --- Gothic Horror (Default/Night) Colors --- */
         --color-gothic-bg: #0A0A0A;
-        --color-gothic-text: #F0F0F0;
+        --color-gothic-text: #F0F0F0; /* WHITE/LIGHT GRAY */
         --color-gothic-accent: #800000;
-        --color-gothic-glow: #A30000;
+        --color-gothic-glow: #A30000; /* BRIGHT RED */
         --color-gothic-border: #4D4D4D;
 
         /* Pixel Block Style */
@@ -26,12 +29,12 @@
 
         /* --- Magical Fairytale (Light/Day) Colors --- */
         --color-cute-bg: #FFFBF5;
-        --color-cute-text: #2c2c2c;
-        --color-cute-accent: #D4AF37;
+        --color-cute-text: #2c2c2c; /* DARK TEXT */
+        --color-cute-accent: #D4AF37; /* GOLD/YELLOW */
         --color-cute-glow: #FFD700;
+        /* Fairytale Pixel Block Style */
         --color-cute-border: #A9A9A9;
 
-        /* Fairytale Pixel Block Style */
         --color-cute-block-main: #F4F0E6;
         --color-cute-block-shadow: #6D6D6D;
 
@@ -54,7 +57,7 @@
         transition: background-color var(--transition-speed), color var(--transition-speed);
     }
 
-    h1, h2, h3 {
+    h1, h2, h3, h4 { 
         font-family: 'Press Start 2P', cursive;
         letter-spacing: 2px;
     }
@@ -62,8 +65,6 @@
     /* ======================================
         1. THEME TOGGLE
         ====================================== */
-    #theme-toggle { display: none; }
-
     .theme-toggle {
         position: fixed;
         top: 20px;
@@ -80,49 +81,44 @@
     }
 
     .theme-toggle .cute-icon { display: none; }
+    .page-wrapper.cute-mode .gothic-icon { display: none; }
+    .page-wrapper.cute-mode .cute-icon { display: inline; }
 
     .theme-toggle:active {
         transform: translate(var(--border-thickness), var(--border-thickness));
         box-shadow: none;
     }
 
-    #theme-toggle:checked ~ .theme-toggle .gothic-icon { display: none; }
-    #theme-toggle:checked ~ .theme-toggle .cute-icon { display: inline; }
+    /* Cute Mode Styles applied via JavaScript class 'cute-mode' */
+    .page-wrapper.cute-mode {
+        background-color: var(--color-cute-bg);
+        color: var(--color-cute-text);
+    }
 
-    #theme-toggle:checked ~ .theme-toggle {
+    .page-wrapper.cute-mode .theme-toggle {
         background-color: var(--color-cute-block-main);
         color: var(--color-cute-glow);
         border-color: var(--color-cute-border);
         box-shadow: var(--border-thickness) var(--border-thickness) 0 var(--color-cute-block-shadow);
     }
 
-    #theme-toggle:checked ~ .page-wrapper {
-        background-color: var(--color-cute-bg);
-        color: var(--color-cute-text);
-    }
-
-    #theme-toggle:checked ~ .page-wrapper .name,
-    #theme-toggle:checked ~ .page-wrapper .section-title {
+    .page-wrapper.cute-mode .name,
+    .page-wrapper.cute-mode .section-title {
+        /* Main section titles in cute mode (Dark Text with Gold Shadow) */
         color: var(--color-cute-text);
         text-shadow: 2px 2px 0 var(--color-cute-accent);
     }
-
-    #theme-toggle:checked ~ .page-wrapper .pixel-block,
-    #theme-toggle:checked ~ .page-wrapper .pixel-button,
-    #theme-toggle:checked ~ .page-wrapper .avatar-frame {
+    
+    .page-wrapper.cute-mode .pixel-block,
+    .page-wrapper.cute-mode .avatar-frame {
         background-color: var(--color-cute-block-main);
         color: var(--color-cute-text);
         border-color: var(--color-cute-border);
         box-shadow: var(--border-thickness) var(--border-thickness) 0 var(--color-cute-block-shadow);
     }
 
-    #theme-toggle:checked ~ .page-wrapper .pixel-button {
-        background-color: var(--color-cute-accent);
-        color: var(--color-cute-text);
-    }
-
-    #theme-toggle:checked ~ .page-wrapper .tagline,
-    #theme-toggle:checked ~ .page-wrapper .scroll-indicator {
+    .page-wrapper.cute-mode .tagline,
+    .page-wrapper.cute-mode .scroll-indicator {
         color: var(--color-cute-glow);
     }
 
@@ -135,14 +131,14 @@
         padding: 0 20px;
         background-color: var(--color-gothic-bg);
         background-image: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.05) 1px, transparent 0),
-                          radial-gradient(circle at 90% 70%, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+                            radial-gradient(circle at 90% 70%, rgba(255, 255, 255, 0.05) 1px, transparent 0);
         background-size: 50px 50px;
     }
 
-    #theme-toggle:checked ~ .page-wrapper {
+    .page-wrapper.cute-mode {
         background-color: var(--color-cute-bg);
         background-image: radial-gradient(circle at 30% 20%, rgba(255, 255, 200, 0.2) 2px, transparent 0),
-                          radial-gradient(circle at 70% 80%, rgba(255, 255, 200, 0.2) 2px, transparent 0);
+                            radial-gradient(circle at 70% 80%, rgba(255, 255, 200, 0.2) 2px, transparent 0);
         background-size: 100px 100px;
     }
 
@@ -164,7 +160,7 @@
         );
     }
 
-    #theme-toggle:checked ~ .pixel-overlay { opacity: 0; }
+    .page-wrapper.cute-mode ~ .pixel-overlay { opacity: 0; }
 
     /* ======================================
         3. PIXEL ELEMENTS
@@ -176,7 +172,7 @@
         border-radius: 0;
         box-shadow: var(--border-thickness) var(--border-thickness) 0 var(--color-block-shadow);
         transition: all var(--transition-speed) ease;
-        background-color: var(--color-block-main);
+        background-color: var(--color-block-main); /* Default for blocks/frames */
     }
 
     .pixel-button {
@@ -188,12 +184,40 @@
         gap: 8px;
         cursor: pointer;
         color: var(--color-gothic-glow);
+        text-decoration: none;
+        margin: 5px;
+        /* Default Gothic button background/style: */
+        background-color: var(--color-block-main); 
     }
+    
+    /* Ensure the buttons function as buttons */
+    .pixel-button[type="button"] { 
+        border: var(--border-thickness) solid var(--color-gothic-border);
+    }
+
 
     .pixel-button:hover,
     .pixel-block:hover {
         transform: translate(var(--border-thickness), var(--border-thickness));
         box-shadow: none;
+    }
+    
+    /* FIX: Explicitly target all pixel buttons when the body is in cute-mode */
+    body.cute-mode .pixel-button {
+        background-color: var(--color-cute-accent); 
+        color: var(--color-cute-text); 
+        border-color: var(--color-cute-border);
+        box-shadow: var(--border-thickness) var(--border-thickness) 0 var(--color-cute-block-shadow); 
+    }
+    
+    /* FIX: Ensure cute mode button styling applies to buttons with type="button" */
+    body.cute-mode .pixel-button[type="button"] {
+         border-color: var(--color-cute-border);
+    }
+
+    .page-wrapper.cute-mode .image-placeholder {
+        background: var(--color-cute-accent);
+        border: 2px dashed var(--color-cute-glow);
     }
 
     /* ======================================
@@ -208,25 +232,82 @@
         justify-content: center;
         text-align: center;
     }
+    
+    /* Ensure the last section doesn't force min-height if content is short */
+    #activities.section {
+         min-height: auto;
+         padding-bottom: 100px; /* Ensure good spacing before the footer */
+    }
+
+    /* --- Footer Styling --- */
+    .footer-section {
+        min-height: auto; 
+        padding: 30px 0 50px 0; 
+        text-align: center;
+        font-size: 1.1rem;
+        color: var(--color-gothic-text); 
+    }
+
+    .page-wrapper.cute-mode .footer-section {
+        color: var(--color-cute-text);
+    }
+
+    .footer-section p {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        padding-top: 20px;
+    }
+
 
     .section-title {
         margin-bottom: 50px;
-        font-size: 3rem;
-        color: var(--color-gothic-text);
+        font-size: 2rem;
+        /* Main Section Title (Dark Mode) - WHITE with RED GLOW */
+        color: var(--color-gothic-text); 
         text-shadow: 0 0 5px var(--color-gothic-glow), 0 0 10px var(--color-gothic-glow);
     }
 
+    /* --- Combined About/Skills Section Overrides --- */
+    #about-skills-combo.section {
+        min-height: auto; 
+        padding: 80px 0; 
+    }
+    
+    #about-skills-combo .pixel-block {
+        padding: 30px; 
+        text-align: left; 
+    }
+    
+    /* === Final Fix: Explicitly Style H3 and H4 inside About/Skills Section per Mode === */
+    /* 1. DARK MODE (Gothic Red Glow - To Match Main Section Title) */
+    #about-skills-combo h3, 
+    #about-skills-combo h4 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        /* GINAGAWANG Puti (gothic text) para parehas sa main title */
+        color: var(--color-gothic-text); 
+        /* PANATILIHIN ANG GLOW EFFECT */
+        text-shadow: 0 0 5px var(--color-gothic-glow), 0 0 10px var(--color-gothic-glow); 
+    }
+    
+    /* 2. LIGHT MODE OVERRIDE (Cute Mode: Dark Text with Gold Shadow - To Match Main Title) */
+    body.cute-mode #about-skills-combo h3, 
+    body.cute-mode #about-skills-combo h4 {
+        color: var(--color-cute-text); /* Dark Text */
+        text-shadow: 2px 2px 0 var(--color-cute-accent); /* Gold Shadow */
+    }
+    /* ================================================================================= */
+
+    /* --- Intro Section Overrides --- */
     .intro-content {
-        display: flex;
-        gap: 50px;
-        align-items: flex-start;
         max-width: 900px;
         width: 100%;
     }
 
     .intro-text-links {
         text-align: left;
-        flex: 1;
     }
 
     .name {
@@ -240,6 +321,7 @@
         color: var(--color-gothic-glow);
     }
 
+    /* Scroll Indicator as a button/link */
     .scroll-indicator {
         position: absolute;
         bottom: 40px;
@@ -248,10 +330,11 @@
         font-size: 2rem;
         animation: bounce 2s infinite;
         color: var(--color-gothic-glow);
+        text-decoration: none;
+        cursor: pointer;
     }
 
     .avatar-frame {
-        flex-shrink: 0;
         width: 250px;
         height: 300px;
         display: flex;
@@ -262,20 +345,16 @@
         color: var(--color-gothic-glow);
     }
 
-    .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 40px;
-        width: 100%;
-        padding-bottom: 50px;
-    }
-
-    .project-card {
+    /* --- Skills List Styling --- */
+    .skills-list, .activities-grid {
         display: flex;
-        flex-direction: column;
-        text-align: left;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+        justify-content: flex-start; 
     }
 
+    /* Project/Activity Card Styling */
     .image-placeholder {
         width: 100%;
         height: 180px;
@@ -284,25 +363,163 @@
         align-items: center;
         justify-content: center;
         border: 2px dashed var(--color-gothic-glow);
-        font-family: 'Press Start 2P', cursive;
+        /* The following line is removed as we are now using actual images */
+        /* font-family: 'Press Start 2P', cursive; */
         font-size: 0.8rem;
         margin-bottom: 10px;
     }
 
-    #theme-toggle:checked ~ .page-wrapper .image-placeholder {
-        background: var(--color-cute-accent);
-        border: 2px dashed var(--color-cute-glow);
+    /* NEW: Style for actual images inside placeholders/modals */
+    .activity-card img, .modal-image-placeholder img {
+        object-fit: contain; /* Ensures the whole image is visible */
+        width: 100%;
+        height: 100%;
+        display: block; /* Ensures no extra space below inline elements */
     }
 
-    .view-project-btn {
+    .project-card, .activity-card {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        padding: 20px;
+        margin-bottom: 20px;
+        height: 100%; 
+    }
+
+    /* Set minimum height for card body content to ensure uniformity */
+    .card-content-body {
+        flex-grow: 1; 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; 
+    }
+
+    /* === CRITICAL FIX FOR ALIGNMENT === */
+    .activity-description {
+        margin-top: 5px;
+        margin-bottom: auto; 
+        min-height: 40px; /* Forces enough space for 2 lines of text (approx) */
+    }
+    /* ================================== */
+
+    .tech-stack, .activity-details {
+        font-size: 0.9rem;
+        color: var(--color-gothic-glow);
+        margin-top: 5px;
+    }
+    
+    /* Use the same styling for both project and activity buttons within cards */
+    .view-project-btn, .view-activity-btn {
         align-self: flex-start;
         margin-top: 15px;
+        width: 100%; 
+        /* Ensure buttons are properly styled as pixel buttons */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
 
+    /* --- Modal Styling (Custom Pixel Look) --- */
+    .modal-content.pixel-block {
+        border-radius: 0;
+        background-color: var(--color-block-main);
+        color: var(--color-gothic-text);
+        border: var(--border-thickness) solid var(--color-gothic-border);
+        box-shadow: var(--border-thickness) var(--border-thickness) 0 var(--color-block-shadow);
+        padding: 20px;
+    }
+
+    /* === Custom CSS for Activity Modals === */
+    .activity-modal-custom {
+        padding: 10px; 
+    }
+    .activity-modal-custom .modal-body {
+        padding: 0 1rem 1rem 1rem; 
+    }
+    .activity-modal-custom .modal-header {
+        padding: 0 1rem 0.5rem 1rem;
+    }
+    .activity-modal-custom .modal-footer {
+        padding: 0.5rem 1rem 0 1rem;
+    }
+    .activity-modal-custom .modal-image-placeholder {
+        height: auto; 
+    }
+    
+    /* FIX: Use body.cute-mode to target the modal content */
+    body.cute-mode .modal-content.pixel-block {
+        background-color: var(--color-cute-block-main);
+        color: var(--color-cute-text);
+        border-color: var(--color-cute-border);
+        box-shadow: var(--border-thickness) var(--border-thickness) 0 var(--color-cute-block-shadow);
+    }
+
+    .modal-header, .modal-footer {
+        border: none;
+        padding: 0 0 1rem 0;
+    }
+
+    .modal-title {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 1.5rem;
+        color: var(--color-gothic-glow);
+    }
+
+    /* FIX: Use body.cute-mode to target the modal title */
+    body.cute-mode .modal-title {
+        color: var(--color-cute-glow);
+    }
+    
+    .modal-close-btn {
+        font-size: 1.5rem;
+        padding: 0;
+        opacity: 1;
+        background: none;
+        border: none;
+        color: var(--color-gothic-glow);
+        cursor: pointer;
+        line-height: 1;
+        transition: color var(--transition-speed);
+    }
+
+    /* FIX: Use body.cute-mode to target the modal close button */
+    body.cute-mode .modal-close-btn {
+        color: var(--color-cute-text);
+    }
+
+    .modal-close-btn:hover {
+        color: var(--color-gothic-accent);
+    }
+    
+    body.cute-mode .modal-close-btn:hover {
+        color: var(--color-cute-accent);
+    }
+
+    .modal-image-placeholder {
+        width: 100%;
+        height: 300px;
+        background: var(--color-gothic-accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px dashed var(--color-gothic-glow);
+        /* The following line is removed as we are now using actual images */
+        /* font-family: 'Press Start 2P', cursive; */
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+    
+    /* FIX: Apply Cute Mode styles to the modal image placeholder */
+    body.cute-mode .modal-image-placeholder {
+        background: var(--color-cute-accent);
+        border: 2px dashed var(--color-cute-glow);
+        color: var(--color-cute-text);
+    }
+    
     /* ======================================
         5. RESPONSIVE
         ====================================== */
-    @media (max-width: 850px) {
+    @media (max-width: 992px) {
         .intro-content {
             flex-direction: column;
             align-items: center;
@@ -321,9 +538,7 @@
             margin-bottom: 30px;
         }
 
-        .projects-grid { grid-template-columns: 1fr; }
-
-        .view-project-btn { align-self: center; }
+        .view-project-btn, .view-activity-btn { align-self: center; }
 
         .section { padding: 50px 10px; }
     }
@@ -334,98 +549,320 @@
         60% { transform: translateY(-5px) translateX(-50%); }
     }
     </style>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-    <input type="checkbox" id="theme-toggle" aria-label="Toggle Fairytale/Gothic Theme">
-
-    <div class="page-wrapper">
-        <label for="theme-toggle" class="theme-toggle" title="Toggle Theme">
+    <div class="page-wrapper" id="pageWrapper">
+        <button id="themeToggleBtn" class="theme-toggle" title="Toggle Theme">
             <span class="gothic-icon">💀</span>
             <span class="cute-icon">🧚‍♀️</span>
-        </label>
+        </button>
 
         <section id="intro" class="section intro-section">
             <div class="intro-content">
-                <div class="avatar-frame">
-                    <p class="avatar-text"></p>
-                </div>
+                <div class="row align-items-start">
+                    <div class="col-lg-4 d-flex justify-content-center mb-4 mb-lg-0">
+                        <div class="avatar-frame">
+                            <p class="avatar-text">INSERT IMAGE</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 intro-text-links">
+                        <h1 class="name">Czylle Johanne Magpantay</h1>
+                        <p class="title">IT Student & Aspiring Developer</p>
+                        <p class="tagline">Turning code into creative solutions</p>
 
-                <div class="intro-text-links">
-                    <h1 class="name">Czylle Johanne Magpantay</h1>
-                    <p class="title">IT Student & Aspiring Developer</p>
-                    <p class="tagline">Turning code into creative solutions</p>
-
-                    <div class="links-container">
-                        <a href="#" class="pixel-button"><i class="fab fa-github"></i> GitHub</a>
-                        <a href="#" class="pixel-button"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                        <a href="#" class="pixel-button"><i class="fas fa-envelope"></i> Email</a>
+                        <div class="links-container">
+                            <a href="https://github.com/your-username" target="_blank" class="pixel-button"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="https://linkedin.com/in/your-username" target="_blank" class="pixel-button"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a href="mailto:smczyllejohanne@gmail.com" class="pixel-button"><i class="fas fa-envelope"></i> Email</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="scroll-indicator">
+            <a href="#about-skills-combo" class="scroll-indicator">
                 <i class="fas fa-angle-down"></i>
-            </div>
+            </a>
         </section>
 
-        <section id="about" class="section about-section">
-            <h2 class="section-title">🔮 About Me 🔮</h2>
-            <div class="about-content pixel-block">
-                <p>Hello! I’m Czylle, a 3rd-year Bachelor of Science in Information Technology student at the Polytechnic University of the Philippines – Sto. Tomas Campus. I’m passionate about design and development, where creativity meets technology. I enjoy transforming ideas into functional, elegant, and visually engaging digital experiences through code and design.</p>
+        <section id="about-skills-combo" class="section">
+            <h2 class="section-title">👾 About Me & My Skills 💥</h2>
+            <div class="container">
+                <div class="row justify-content-center align-items-stretch">
 
-                <h3><i class="fas fa-magic"></i> Languages & Skills:</h3>
-                <div class="skills-list">
-                    <span class="skill-tag pixel-button">C / C++</span>
-                    <span class="skill-tag pixel-button">HTML / CSS</span>
-                    <span class="skill-tag pixel-button">Python</span>
-                    <span class="skill-tag pixel-button">Java</span>
+                    <div class="col-lg-6 mb-4 mb-lg-0"> 
+                        <div class="pixel-block h-100"> 
+                            <h3>About Me</h3> 
+                            <p>Hello! I’m Czylle, a 3rd-year Bachelor of Science in Information Technology student at the Polytechnic University of the Philippines – Sto. Tomas Campus. I’m passionate about design and development, where creativity meets technology. I enjoy transforming ideas into functional, elegant, and visually engaging digital experiences through code and design.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="pixel-block h-100"> 
+                            <h3>Tech Stack</h3> 
+                            <p class="mb-3">My current proficiency in languages and frameworks:</p> 
+                            <h4><i class="fas fa-magic"></i> Languages & Frameworks:</h4>
+                            <div class="skills-list">
+                                <span class="skill-tag pixel-button">C / C++</span>
+                                <span class="skill-tag pixel-button">HTML / CSS</span>
+                                <span class="skill-tag pixel-button">Python</span>
+                                <span class="skill-tag pixel-button">Java</span>
+                                <span class="skill-tag pixel-button">Bootstrap</span>
+                                <span class="skill-tag pixel-button">JavaScript</span>
+                            </div>
+                            <p class="level-note">(Basic to Moderate Proficiency)</p>
+                        </div>
+                    </div>
+
                 </div>
-                <p class="level-note">(Basic to Moderate Proficiency)</p>
             </div>
         </section>
 
         <section id="projects" class="section projects-section">
             <h2 class="section-title">🗡️ Projects 🗡️</h2>
-            <div class="projects-grid">
-                <div class="pixel-block project-card">
-                    <div class="image-placeholder"><p>[ PROJECT EXAMPLE ]</p></div>
-                    <h3>Project Name A</h3>
-                    <p class="project-description">...</p>
-                    <p class="tech-stack">...</p>
-                    <a href="#" class="pixel-button view-project-btn">View Project</a>
-                </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="pixel-block project-card">
+                            <div class="image-placeholder"><p>[ PROJECT EXAMPLE 1 ]</p></div>
+                            <div class="card-content-body">
+                                <h3>Project Name A</h3>
+                                <p class="project-description">A cool web development project using HTML, CSS, and Bootstrap.</p>
+                                <p class="tech-stack">Tech: HTML, CSS, Bootstrap, JavaScript | Area: Web Dev</p>
+                                <button type="button" class="pixel-button view-project-btn" data-bs-toggle="modal" data-bs-target="#projectModal1">
+                                    View Project <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="pixel-block project-card">
-                    <div class="image-placeholder"><p>[ PROJECT EXAMPLE ]</p></div>
-                    <h3>Project Name B</h3>
-                    <p class="project-description">...</p>
-                    <p class="tech-stack">...</p>
-                    <a href="#" class="pixel-button view-project-btn">View Project</a>
-                </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="pixel-block project-card">
+                            <div class="image-placeholder"><p>[ PROJECT EXAMPLE 2 ]</p></div>
+                            <div class="card-content-body">
+                                <h3>Project Name B</h3>
+                                <p class="project-description">A console application developed in C++ to solve a specific problem.</p>
+                                <p class="tech-stack">Tech: C++, Basic Algorithms | Area: Programming</p>
+                                <button type="button" class="pixel-button view-project-btn" data-bs-toggle="modal" data-bs-target="#projectModal2">
+                                    View Project <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="pixel-block project-card">
-                    <div class="image-placeholder"><p>[ PROJECT EXAMPLE ]</p></div>
-                    <h3>Project Name C</h3>
-                    <p class="project-description">...</p>
-                    <p class="tech-stack">...</p>
-                    <a href="#" class="pixel-button view-project-btn">View Project</a>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="pixel-block project-card">
+                            <div class="image-placeholder"><p>[ PROJECT EXAMPLE 3 ]</p></div>
+                            <div class="card-content-body">
+                                <h3>Project Name C</h3>
+                                <p class="project-description">A simple Python script for data processing or a small game.</p>
+                                <p class="tech-stack">Tech: Python, Pandas/Pygame | Area: Data/Scripting</p>
+                                <button type="button" class="pixel-button view-project-btn" data-bs-toggle="modal" data-bs-target="#projectModal3">
+                                    View Project <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="section contact-section">
-            <h2 class="section-title">✉️ Contact ✉️</h2>
-            <div class="contact-details pixel-block">
-                <p class="contact-email"><i class="fas fa-envelope"></i> smczyllejohanne@gmail.com</p>
+        <section id="activities" class="section activities-section">
+            <h2 class="section-title">💻 Activities: Web Development 💻</h2>
+            <div class="container">
+                <div class="row justify-content-center align-items-stretch">
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="pixel-block activity-card">
+                            <div class="image-placeholder">
+                                <img src="assets/mouse.png" alt="Mouse Showcase Preview" class="img-fluid" style="height: 100%;">
+                            </div>
+                            <div class="card-content-body">
+                                <h3>Mouse Showcase</h3>
+                                <p class="activity-description">A responsive web page created to highlight the product features of a gaming mouse.</p>
+                                <p class="activity-details">Tech: HTML, CSS, Bootstrap | Area: Web Dev</p>
+                                <button type="button" class="pixel-button view-activity-btn" data-bs-toggle="modal" data-bs-target="#activityModal1">
+                                    View More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="pixel-block activity-card">
+                            <div class="image-placeholder">
+                                <img src="assets/santorini.png" alt="Santorini Showcase Preview" class="img-fluid" style="height: 100%;">
+                            </div>
+                            <div class="card-content-body">
+                                <h3>Santorini Showcase</h3>
+                                <p class="activity-description">A travel-themed landing page demonstrating clean design principles and high-quality photo presentation.</p>
+                                <p class="activity-details">Tech: HTML, CSS, JavaScript, Bootstrap | Area: Web Dev</p>
+                                <button type="button" class="pixel-button view-activity-btn" data-bs-toggle="modal" data-bs-target="#activityModal2">
+                                    View More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="thank-you-quote">“Let’s build something amazing together.”</p>
         </section>
+        
+        <section id="footer" class="footer-section">
+            <p>Made with 🖤 and 👾 by Czylle Magpantay</p>
+        </section>
+
     </div>
 
     <div class="pixel-overlay"></div>
+
+    <div class="modal fade" id="projectModal1" tabindex="-1" aria-labelledby="projectModal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content pixel-block">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="projectModal1Label">Project Name A: Cool Web Project</h5>
+                    <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image-placeholder">
+                        <p>[ PROJECT A SCREENSHOT ]</p>
+                    </div>
+                    <p>This project was my first attempt at building a fully responsive multi-page website without relying heavily on pre-built templates. The design focuses on clean aesthetics and uses Bootstrap 5 for layout management.</p>
+                    <p class="tech-stack">Key Features: Responsive design, custom CSS animations, basic form validation (using JavaScript).</p>
+                    <p class="tech-stack">Tech Stack: HTML5, CSS3, Bootstrap, Vanilla JavaScript.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="projectModal2" tabindex="-1" aria-labelledby="projectModal2Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content pixel-block">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="projectModal2Label">Project Name B: C++ Console App</h5>
+                    <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image-placeholder">
+                        <p>[ C++ CONSOLE SCREENSHOT ]</p>
+                    </div>
+                    <p>A back-end console application developed to manage inventory for a small hypothetical business. It demonstrates fundamental C++ concepts such as object-oriented programming (OOP), file handling, and basic data structures (arrays/vectors).</p>
+                    <p class="tech-stack">Skills Demonstrated: OOP (Classes, Objects), Data Input/Output, Error Handling.</p>
+                    <p class="tech-stack">Tech Stack: C++, Visual Studio.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="projectModal3" tabindex="-1" aria-labelledby="projectModal3Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content pixel-block">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="projectModal3Label">Project Name C: Python Script</h5>
+                    <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image-placeholder">
+                        <p>[ PYTHON CODE/OUTPUT SAMPLE ]</p>
+                    </div>
+                    <p>A short Python script designed for automating a simple task, such as processing a CSV file or acting as a basic text adventure game. This showcases beginner-level proficiency in Python syntax and library usage (e.g., NumPy or Pygame lite).</p>
+                    <p class="tech-stack">Skills Demonstrated: Scripting, basic control flow (loops, conditionals), function use.</p>
+                    <p class="tech-stack">Tech Stack: Python.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="activityModal1" tabindex="-1" aria-labelledby="activityModal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md"> 
+            <div class="modal-content pixel-block activity-modal-custom"> 
+                <div class="modal-header">
+                    <h5 class="modal-title" id="activityModal1Label">Mouse Showcase Details</h5>
+                    <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image-placeholder">
+                        <img src="assets/mouse.png" alt="Mouse Showcase Full View" class="img-fluid" style="height: 100%;">
+                    </div>
+                    <p>The web page showcases the HandShoe Mouse Shift, a premium ergonomic pointing device designed to radically improve user comfort and performance. Built with responsive design using Bootstrap, the site presents crisp visuals of the mouse’s unique form factor and highlights its key technical features—such as a 25° tilted posture, ambidextrous toggle button, dual wireless and wired connectivity, and a precision “BlueRay Track” 1000 DPI sensor—clearly laid out and easy to scan. It also emphasizes the fit-customization (sizes S/M/L) for optimal hand support. The entire project was version-controlled via Git, hosted in a fresh GitHub repository, and pushed through standard Git commands, fulfilling the deployment requirement with a live demo available online.</p>
+                    <p class="activity-details">Skills Applied: Responsive Design (Mobile-First), Bootstrap Layouts, CSS Styling, Feature Highlighting.</p>
+                    <p class="activity-details">Link: https://zeejojo.github.io/mouse-showcase/</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="https://zeejojo.github.io/mouse-showcase/" target="_blank" class="pixel-button view-project-btn">View Live Project <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="activityModal2" tabindex="-1" aria-labelledby="activityModal2Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md"> 
+            <div class="modal-content pixel-block activity-modal-custom"> 
+                <div class="modal-header">
+                    <h5 class="modal-title" id="activityModal2Label">Santorini Showcase Details</h5>
+                    <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image-placeholder">
+                        <img src="assets/santorini.png" alt="Santorini Landing Page Full View" class="img-fluid" style="height: 100%;">
+                    </div>
+                    <p>The project titled “Santorini Showcase” is a Bootstrap-based website that highlights the beauty, culture, and timeless charm of Santorini, Greece. Designed with a clean and responsive layout, the site features a visually captivating homepage that introduces Santorini as “The Greatest Place on Earth.” Navigation links lead to sections such as About and Tourist Spots, offering viewers insights into the island’s architecture, stunning landscapes, and rich heritage. The design emphasizes simplicity and elegance, using large background imagery to evoke the island’s serene atmosphere. The project was developed following web design best practices, version-controlled via Git, and deployed through a dedicated GitHub repository to meet all technical and deployment requirements.</p>
+                    <p class="activity-details">Skills Applied: Visual Hierarchy, Grid Systems, Aesthetic Design, Content Presentation.</p>
+                    <p class="activity-details">Link: https://zeejojo.github.io/showcase_santorini/</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="https://zeejojo.github.io/showcase_santorini/" target="_blank" class="pixel-button view-project-btn">View Live Project <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('themeToggleBtn');
+            const pageWrapper = document.getElementById('pageWrapper');
+            // Get the body element to apply the theme class to the document root
+            const body = document.body; 
+
+            function setTheme(isCuteMode) {
+                if (isCuteMode) {
+                    pageWrapper.classList.add('cute-mode');
+                    // Apply to body for modal theming
+                    body.classList.add('cute-mode'); 
+                    localStorage.setItem('theme', 'cute');
+                } else {
+                    pageWrapper.classList.remove('cute-mode');
+                    // Remove from body
+                    body.classList.remove('cute-mode'); 
+                    localStorage.setItem('theme', 'gothic');
+                }
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'cute') {
+                setTheme(true);
+            } else {
+                 setTheme(false); 
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                const isCuteMode = pageWrapper.classList.contains('cute-mode');
+                setTheme(!isCuteMode);
+            });
+        });
+    </script>
 </body>
 </html>
