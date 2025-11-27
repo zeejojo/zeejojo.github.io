@@ -324,7 +324,14 @@
         margin-top: 5px;
         margin-bottom: auto; 
     }
-
+    
+    /* in light/cute mode show activity details in yellow; in dark mode they stay red */
+    body.cute-mode .tech-stack,
+    body.cute-mode .activity-details {
+        color: #FFD700;
+        text-shadow: 0 0 6px rgba(255,215,0,0.35);
+    }
+    
     /* Override for empty project card tags to keep structure */
     .project-card .card-content-body {
         justify-content: flex-start; 
